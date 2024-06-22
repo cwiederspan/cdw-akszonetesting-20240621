@@ -11,7 +11,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # Setup environment variables
 BASE_NAME=cdw-akstesting-20240621
-LOCATION=westus2
+LOCATION=westus3
 
 
 # Check capacity
@@ -25,6 +25,9 @@ az group create --name $BASE_NAME --location $LOCATION
 
 # Deploy the AKS cluster using the bicep file
 az deployment group create -g $BASE_NAME --template-file ./infra/main.bicep --parameters baseName=$BASE_NAME location=$LOCATION nodeZones="['3']"
+
+# Clean up the resource group
+az group delete --name $BASE_NAME
 
 
 ```
